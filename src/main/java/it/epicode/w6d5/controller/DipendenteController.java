@@ -10,6 +10,7 @@ import it.epicode.w6d5.modelRequest.DispositivoRequest;
 import it.epicode.w6d5.service.DipendenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ public class DipendenteController {
         return dipendenteService.getAllDipendenti(pageable);
     }
     @GetMapping("/dipendenti/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Dipendente getAutoreById(@PathVariable int id)  {
         return dipendenteService.lookingForId(id);
 
